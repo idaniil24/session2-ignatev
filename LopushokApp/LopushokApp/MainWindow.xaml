@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LopushokApp"
-        Icon="C:\Users\Administrator\Desktop\App\LopushokApp\LopushokApp\resources\Лопушок.ico"
+        Icon="resources\Лопушок.ico"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Лопушок" Height="450" Width="800" FontFamily="Gabriola">
@@ -45,7 +45,7 @@
                                 <Binding Path="Image">
                                     <Binding.TargetNullValue>
                                         <ImageSource>
-                                            C:\Users\Administrator\Desktop\App\LopushokApp\LopushokApp\resources\picture.png
+                                            resources\picture.png
                                         </ImageSource>
                                     </Binding.TargetNullValue>
                                 </Binding>
