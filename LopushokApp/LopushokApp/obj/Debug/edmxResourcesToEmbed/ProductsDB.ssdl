@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище user10Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "user10.dbo.Materials" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Materials">
+    <Key>
+      <PropertyRef Name="MaterialsId" />
+    </Key>
+    <Property Name="MaterialsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaterialName" Type="nvarchar" MaxLength="255" />
+    <Property Name="CountOfMaterial" Type="float" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="255" />
+    <Property Name="Article" Type="float" />
+    <Property Name="MinPriceForAgent" Type="float" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProductType" Type="int" />
+    <Property Name="CounOfMansForCreating" Type="int" />
+    <Property Name="ManifactureID" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ProductsHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OldMinPrice" Type="int" />
+    <Property Name="NewMinPrice" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="ProductsTypes">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_products_ProductsTypes">
+    <End Role="ProductsTypes" Type="Self.ProductsTypes" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductsTypes">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="ProductType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Хранилище user10ModelContainer">
+    <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductsHistory" EntityType="Self.ProductsHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductsTypes" EntityType="Self.ProductsTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Materials" EntityType="Self.Materials" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Materials].[MaterialsId] AS [MaterialsId], 
+    [Materials].[MaterialName] AS [MaterialName], 
+    [Materials].[CountOfMaterial] AS [CountOfMaterial]
+    FROM [dbo].[Materials] AS [Materials]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_products_ProductsTypes" Association="Self.FK_products_ProductsTypes">
+      <End Role="ProductsTypes" EntitySet="ProductsTypes" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
